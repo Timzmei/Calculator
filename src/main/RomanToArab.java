@@ -9,12 +9,12 @@ public class RomanToArab {
     String number;
     Integer value;
 
-    public RomanToArab(String number) {
+    public RomanToArab(String number) throws Exception {
         this.number = number;
         value = setValue(number);
     }
 
-    private Integer setValue(String number) {
+    private Integer setValue(String number) throws Exception {
         TreeMap<String, Integer>arabNumber = new TreeMap<>();
         arabNumber.put("I", 1);
         arabNumber.put("II", 2);
@@ -26,6 +26,10 @@ public class RomanToArab {
         arabNumber.put("VIII", 8);
         arabNumber.put("XI", 9);
         arabNumber.put("X", 10);
+
+        if(!arabNumber.containsKey(number)){
+            throw new Exception("Элементы введены неправильно");
+        }
 
         return arabNumber.get(number);
 

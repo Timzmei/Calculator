@@ -10,7 +10,7 @@ public class Calculate {
     String type;
     String result;
 
-    public Calculate(String firstNumber, String secondNumber, String operator) {
+    public Calculate(String firstNumber, String secondNumber, String operator) throws Exception {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
         this.operator = operator;
@@ -18,33 +18,50 @@ public class Calculate {
         result = calculate(leadToArab(firstNumber), leadToArab(secondNumber), operator);
     }
 
-    private Integer leadToArab(String number) {
+    private Integer leadToArab(String number) throws Exception {
 
-        if (number.matches("[IVX]")){
+        Integer numberInt;
+
+        if (number.matches("[IVX]+")){
             type = "r";
             RomanToArab romanToArab = new RomanToArab(number);
             return romanToArab.getValue();
         }
-        return Integer.parseInt(number);
+        numberInt = Integer.parseInt(number);
+        if(numberInt > 0 && numberInt <=10){
+            return Integer.parseInt(number);
+        } else {
+            throw new Exception("Элементы введены неправильно");
+        }
     }
 
     public String getResult() {
         return result;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String calculate(Integer firstNumber, Integer secondNumber, String operator) {
+        int result;
         if(operator.equals("+")){
-            return String.valueOf(firstNumber + secondNumber);
+            result = (firstNumber + secondNumber);
         }
         else if(operator.equals("-")){
-            return String.valueOf(firstNumber - secondNumber);
+            result = (firstNumber - secondNumber);
         }
         else if(operator.equals("/")){
-            return String.valueOf(firstNumber / secondNumber);
+            result = (firstNumber / secondNumber);
         }
         else {
-            return String.valueOf(firstNumber * secondNumber);
+            result = (firstNumber * secondNumber);
         }
+        if (type.equals("r")){
+            ArabToRoman arabToRoman = new ArabToRoman(result);
+            return arabToRoman.getNumber();
+        }
+        return String.valueOf(result);
     }
 
 
