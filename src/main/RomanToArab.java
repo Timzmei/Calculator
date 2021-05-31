@@ -24,7 +24,7 @@ public class RomanToArab {
         arabNumber.put("VI", 6);
         arabNumber.put("VII", 7);
         arabNumber.put("VIII", 8);
-        arabNumber.put("XI", 9);
+        arabNumber.put("IX", 9);
         arabNumber.put("X", 10);
 
         if(!arabNumber.containsKey(number)){
